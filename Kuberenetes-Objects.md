@@ -17,7 +17,7 @@ spec:
   restartPolicy: Never         # Defaults to Always
 ```
 
-**Create a pod with the help of yaml file**
+### Create a pod with the help of yaml file
 
 ```
 kubectl apply -f pod1.yaml
