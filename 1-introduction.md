@@ -74,7 +74,7 @@ Demos that follow a script to show a Kubernetes feature in
 
 
 |Features | Kubernetes | Docker Swarm |
-------------- | ------------- | ------------ | ------------ |
+------------- | ------------- | ------------ | 
 | Installation and Cluster configuration | Complicated and Time consuming | Fast and easy |
 | Supports | Works with all container types - Rocket, Docker, ContainerD | Works with Docker only | 
 | GUI | Available | No GUI |
