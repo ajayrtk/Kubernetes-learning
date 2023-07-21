@@ -8,12 +8,12 @@ It schedules, runs and mananges isloated containers which are running on virtual
 kind: Pod                              
 apiVersion: v1                     
 metadata:                           
-  name: mypod                  
+  name: ubuntupod                  
 spec:                                    
   containers:                      
-    - name: cont01                     
+    - name: ubuntupod                     
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to Ubuntu machine - Container 01; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
 ```
 ## History

@@ -136,7 +136,7 @@ ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
 
 
-* Should point to documentation on first mention:
+* Should point to documentation on first mentio
   [kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/),
   [pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/),
   [services](https://kubernetes.io/docs/concepts/services-networking/service/),
