@@ -8,14 +8,32 @@ It schedules, runs and mananges isloated containers which are running on virtual
 kind: Pod                              
 apiVersion: v1                     
 metadata:                           
-  name: ubuntupod                  
+  name: testpod                
 spec:                                    
   containers:                      
-    - name: ubuntupod                     
+    - name: container01                     
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
 ```
+
+
+```
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: testpod2                  
+spec:                                    
+  containers:   
+  - name: container01                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]                   
+    - name: container02                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container02; sleep 5 ; done"]
+```
+
+
 ## History
 
 * The name Kubernetes originates from Greek, meaning helmsman or pilot.
