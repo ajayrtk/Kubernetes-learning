@@ -23,29 +23,46 @@ spec:
 kubectl apply -f pod1.yaml
 ```
 
-**Get the details of the pod with more columns**
+### Get the details of the pod with more columns
 
 ```
 kubectl get pods -o wide 
 ```
 
-**Get the detail description of the pod**
+### Get the detail description of the pod
 
 ``` 
  kubectl describe pod testpod1
 ```
 
-**Get the logs of the container**
+### Get the logs of the container
 
 ```
  kubectl logs -f testpod1
 ```
 
-**Get the logs of the specific container if multiple container is running inside the pod**
+### Get the logs of the specific container if multiple container is running inside the pod
 
 ``` 
  kubectl logs -f testpod1 -c container01
 ```
+
+### Creating a container with annotation
+```
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: testpod02
+  annotation:
+    description: My first annotation container                
+spec:                                    
+  containers:                      
+    - name: container01                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]
+  restartPolicy: Never         # Defaults to Always
+```
+
 
 ```
 kind: Pod                              
