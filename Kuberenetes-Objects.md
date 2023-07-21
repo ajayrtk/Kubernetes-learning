@@ -53,11 +53,11 @@ kind: Pod
 apiVersion: v1                     
 metadata:                           
   name: testpod02
-  annotation:
+  annotations:
     description: My first annotation container                
 spec:                                    
   containers:                      
-    - name: container01                     
+    - name: container02                    
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
@@ -68,13 +68,13 @@ spec:
 kind: Pod                              
 apiVersion: v1                     
 metadata:                           
-  name: testpod2                  
+  name: testpod3                 
 spec:                                    
   containers:   
-  - name: container02                     
+  - name: container03                    
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]                   
-    - name: container03                     
+    - name: container04                   
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container02; sleep 5 ; done"]
 ```
@@ -83,10 +83,10 @@ spec:
 kind: Pod
 apiVersion: v1
 metadata:
-  name: testpod3
+  name: testpod4
 spec:
   containers:
-    - name: container04
+    - name: container05
       image: ubuntu
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container04; sleep 5 ; done"]
       env:                        # List of environment variables to be used inside the pod
