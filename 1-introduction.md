@@ -36,7 +36,7 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## Feature of Kubernetes
 
-_Here are the essential Kubernetes features:
+_Here are the essential Kubernetes features:_
 
 * Orchestration (cluster of any number of container running on different network)
 * Automated Scheduling
