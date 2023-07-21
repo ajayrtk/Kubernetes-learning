@@ -55,14 +55,8 @@ _Here are the essential Kubernetes features:_
 * Offers environment consistency for development, testing, and production
 * Infrastructure is loosely coupled to each component can act as a separate unit
 
-Demos that follow a script to show a Kubernetes feature in
-  action. Example: killing a node to demonstrate controller
-    self-healing.
-* A tutorial which guides the user through multiple progressively more
-  complex deployments to arrive at the final solution. An example
-  should just demonstrate how to setup the correct deployment
 
-## Kubernetes vs Docker Swarm:
+## Kubernetes vs Docker Swarm
 
 |Features | Kubernetes | Docker Swarm |
 ------------- | ------------- | ------------ | 
@@ -75,7 +69,9 @@ Demos that follow a script to show a Kubernetes feature in
 | Logging and Monitoring | Inbuitl tool present |  Use third party like Splunk
 
 
-### Up front
+## Kubernetes Architecture
+
+![My Image](images/kubernetes-architecture.jpg)
 
 * Has a "this is what you'll learn" section.
 * Has a Table of Contents.
