@@ -8,7 +8,7 @@ It schedules, runs and mananges isloated containers which are running on virtual
 kind: Pod                              
 apiVersion: v1                     
 metadata:                           
-  name: testpod                
+  name: testpod1                
 spec:                                    
   containers:                      
     - name: container01                     
@@ -25,14 +25,40 @@ metadata:
   name: testpod2                  
 spec:                                    
   containers:   
-  - name: container01                     
+  - name: container02                     
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]                   
-    - name: container02                     
+    - name: container03                     
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container02; sleep 5 ; done"]
+
+```
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod3
+spec:
+  containers:
+    - name: container04
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container04; sleep 5 ; done"]
+      env:                        # List of environment variables to be used inside the pod
+      - name: myname
+        value: Ajay Rawat
 ```
 
+```
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod4
+spec:
+  containers:
+    - name: container05
+      image: httpd
+      ports:
+       - containerPort: 80  
+```
 
 ## History
 
