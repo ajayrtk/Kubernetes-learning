@@ -60,7 +60,19 @@ Demos that follow a script to show a Kubernetes feature in
   complex deployments to arrive at the final solution. An example
   should just demonstrate how to setup the correct deployment
 
-## An Example Includes
+## Kubernetes vs Docker Swarm:
+
+
+|Features | Kubernetes | Docker Swarm |
+------------- | ------------- | ------------ | ------------ |
+| Installation and Cluster configuration | Complicated and Time consuming | Fast and easy |
+| Supports | Works with all container types - Rocket, Docker, ContainerD | Works with Docker only | 
+| GUI | Available | No GUI |
+| Data Volumes | Only shared with containers win same Pod | Can be shared with any other Container |
+| Updates and Rollbacks | Process scheduling to maintain services while updating | Progressive updates of servies health monitoring throught the update|
+| Autoscaling | Vertical and Horizontal | No support|
+| Logging and Monitoring | Inbuitl tool present |  Use third party like Splunk|
+
 
 ### Up front
 
