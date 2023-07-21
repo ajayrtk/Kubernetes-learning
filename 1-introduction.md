@@ -3,26 +3,59 @@ Kubernetes is an open source container orchestration engine for automating deplo
 
 It schedules, runs and mananges isloated containers which are running on virtual | physical | cloud machnies.
 
-The name Kubernetes originates from Greek, meaning helmsman or pilot.
+## History
 
+* The name Kubernetes originates from Greek, meaning helmsman or pilot.
+* Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
+ and services on this cluster.
+* In 2014, Google introduced Kubernetes an open source platform written in Golang and later denoated to CNCF.
 
+## Online platforms for K8s
 
+* Kunernetes playground
+* Play with K8s
+* Play with Kubernetes classroom
 
+## Cloud based K8s services
 
-## An Example Is
+* GKE - Google Kubernetes services
+* AKS - Azure Kubernetes services
+* Amazon EKS - Elastic Kubernetes services
 
-An example demonstrates running an application/framework/workload on
-Kubernetes in a meaningful way. It is educational and informative.
+## Kubernetes Installation Tools
 
-Examples are not:
+* Minicube
+* Kubeadm
+* Kind
 
-* Full app deployments, ready to use, with no explanation. These
-  belong to [Helm charts](https://github.com/kubernetes/charts).
-* Simple toys to show how to use a Kubernetes feature. These belong in
-  the [user guide](https://kubernetes.io/docs/home/).
-* Demos that follow a script to show a Kubernetes feature in
+## Problems with Scaling up the Containers
+
+* Containers cannot communicate with each other
+* Autoscaling and laod balancing was not possible
+* Contianers had to be managed carefully
+
+## Feature of Kubernetes
+
+_Here are the essential Kubernetes features:
+
+* Orchestration (cluster of any number of container running on different network)
+* Automated Scheduling
+* Self-Healing Capabilities
+* Automated rollouts & rollback
+* Horizontal Scaling 
+* Load Balancing
+* Fault tolerance (Node | Pod failure)
+* Health monitoring of containers
+* Offers enterprise-ready features
+* Application-centric management
+* Auto-scalable infrastructure
+* Platform independent (cloud | virtual | physical)
+* Offers environment consistency for development, testing, and production
+* Infrastructure is loosely coupled to each component can act as a separate unit
+
+Demos that follow a script to show a Kubernetes feature in
   action. Example: killing a node to demonstrate controller
-  self-healing.
+    self-healing.
 * A tutorial which guides the user through multiple progressively more
   complex deployments to arrive at the final solution. An example
   should just demonstrate how to setup the correct deployment
