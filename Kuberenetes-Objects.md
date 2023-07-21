@@ -13,7 +13,7 @@ spec:
   containers:                      
     - name: container01                     
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod1 container01; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
 ```
 
@@ -46,6 +46,12 @@ kubectl get pods -o wide
 ``` 
  kubectl logs -f testpod1 -c container01
 ```
+### Delete a container
+```
+kubectl delete pods testpod1
+kubectl delete -f pod1.yaml
+
+```
 
 ### Creating a container with annotation
 ```
@@ -59,10 +65,17 @@ spec:
   containers:                      
     - name: container02                    
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod02 container02; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
 ```
 
+``` 
+ kubectl describe pod testpod02
+ kubectl delete pod testpod02
+ kubectl delete pod2.yaml
+```
+
+### Create multiple containers
 
 ```
 kind: Pod                              
@@ -73,10 +86,20 @@ spec:
   containers:   
   - name: container03                    
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container01; sleep 5 ; done"]                   
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod3 container03; sleep 5 ; done"]                   
     - name: container04                   
       image: ubuntu              
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container02; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod03 container04; sleep 5 ; done"]
+```
+
+```
+kubectl apply -f pod3.yaml
+kubectl describe pod testpod3
+kubectl exec testpod3 -c container03 -- hostname -i
+kubectl exec testpod3 -c container04 -- hostname -i
+kubectl exec testpod3 -it -c container03 -- /bin/bash
+#ps
+#ps -ef
 ```
 
 ```
@@ -88,7 +111,7 @@ spec:
   containers:
     - name: container05
       image: ubuntu
-      command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container04; sleep 5 ; done"]
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod04 container05; sleep 5 ; done"]
       env:                        # List of environment variables to be used inside the pod
       - name: myname
         value: Ajay Rawat
