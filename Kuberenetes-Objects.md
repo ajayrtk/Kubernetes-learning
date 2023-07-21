@@ -17,6 +17,29 @@ spec:
   restartPolicy: Never         # Defaults to Always
 ```
 
+```
+kubectl apply -f pod1.yaml
+```
+
+```
+kubectl get pods -o wide 
+```
+
+``` 
+ kubectl get deployment
+```
+
+``` 
+ kubectl describe pod testpod1
+```
+
+```
+ kubectl logs -f testpod1
+```
+
+``` 
+ kubectl logs -f testpod1 -c container01
+```
 
 ```
 kind: Pod                              
