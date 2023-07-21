@@ -1,6 +1,14 @@
 # What is Kubernetes
 Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
 
+It schedules, runs and mananges isloated containers which are running on virtual | physical | cloud machnies.
+
+The name Kubernetes originates from Greek, meaning helmsman or pilot.
+
+
+
+
+
 ## An Example Is
 
 An example demonstrates running an application/framework/workload on
