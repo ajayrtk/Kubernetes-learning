@@ -95,11 +95,28 @@ There are several key parts to the control plane:
 
 1. **kube-apiserver**
 
-* It’s the only way to interact with a running Kubernetes cluster. You can issue commands to the API server using the Kubectl CLI or an HTTP client.
+* Central hub of the Kubernetes cluster that exposes the Kubernetes API
+* Only way to interact with a running Kubernetes cluster
+* Can issue commands to the API server using the Kubectl CLI or an HTTP client
+* As front end of the Kubernetes API, it serves as the access point for client requests
+* Designed to scale horizontally — scales by deploying more instances
+* The communication between the API server and other components in the cluster happens over TLS to prevent unauthorized access to the cluster
+* API management: Exposes the cluster API endpoint and handles all API requests.
+* Authentication (Using client certificates, bearer tokens, and HTTP Basic Authentication) and Authorization (ABAC and RBAC and
+ evaluation)
+* Processing API requests and validating data for the API objects like pods, services, etc. (Validation and Mutation Admission controllers)
+* It is the only component that communicates with etcd
+* Coordinates all the processes between the control plane and worker node components
 
-The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
+2. **kube-scheduler**
 
-The main implementation of a Kubernetes API server is kube-apiserver. kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. You can run several instances of kube-apiserver and balance traffic between those instances.
+* Watches newly created Pods with no assigned node, and selects a node for them to run on.
+* 
+Factors taken into account for scheduling decisions include: individual and collective resource requirements, hardware/software/policy constraints, affinity and anti-affinity specifications, data locality, inter-workload interference, and deadlines.
+
+
+
+
 
 
 
