@@ -93,7 +93,7 @@ There are several key parts to the control plane:
 * etcd - A persistent data store to keep configurations
 * cloud-controller-manager - A controller manager and a cloud controller manager to manage control loops
 
-1. kube-apiserver
+1. **kube-apiserver**
 
 * It’s the only way to interact with a running Kubernetes cluster. You can issue commands to the API server using the Kubectl CLI or an HTTP client.
 
