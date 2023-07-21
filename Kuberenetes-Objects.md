@@ -17,31 +17,31 @@ spec:
   restartPolicy: Never         # Defaults to Always
 ```
 
-*** Create a pod with the help of yaml file ***
+**Create a pod with the help of yaml file**
 
 ```
 kubectl apply -f pod1.yaml
 ```
 
-*** Get the details of the pod with more columns ***
+**Get the details of the pod with more columns**
 
 ```
 kubectl get pods -o wide 
 ```
 
-*** Get the detail description of the pod ***
+**Get the detail description of the pod**
 
 ``` 
  kubectl describe pod testpod1
 ```
 
-*** Get the logs of the container ***
+**Get the logs of the container**
 
 ```
  kubectl logs -f testpod1
 ```
 
-*** Get the logs of the specific container if multiple container is running inside the pod ***
+**Get the logs of the specific container if multiple container is running inside the pod**
 
 ``` 
  kubectl logs -f testpod1 -c container01
