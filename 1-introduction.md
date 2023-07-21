@@ -87,12 +87,32 @@ The control plane manages and maintains the worker nodes that hold the container
 
 There are several key parts to the control plane:
 
-* An API server that transmits data both within the cluster and with external services
-* A scheduler that handles resource sharing among the nodes
-* A controller manager that watches the state of the nodes
-* A persistent data store to keep configurations
-* A controller manager and a cloud controller manager to manage control loops
-* All these components run on a node called the primary node or master node.
+* kube-apiserver - An API server that transmits data both within the cluster and with external services
+* kube-scheduler - A scheduler that handles resource sharing among the nodes
+* kube-controller-manager - A controller manager that watches the state of the nodes
+* etcd - A persistent data store to keep configurations
+* cloud-controller-manager - A controller manager and a cloud controller manager to manage control loops
+
+1. kube-apiserver
+
+* It’s the only way to interact with a running Kubernetes cluster. You can issue commands to the API server using the Kubectl CLI or an HTTP client.
+
+The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
+
+The main implementation of a Kubernetes API server is kube-apiserver. kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. You can run several instances of kube-apiserver and balance traffic between those instances.
+
+
+
+Control plane component that runs controller processes.
+
+Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
+
+There are many different types of controllers. Some examples of them are:
+
+Node controller: Responsible for noticing and responding when nodes go down.
+Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those tasks to completion.
+EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
+ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
 #### Master Node
 
