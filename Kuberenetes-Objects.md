@@ -31,6 +31,7 @@ spec:
     - name: container03                     
       image: ubuntu              
       command: ["/bin/bash", "-c", "while true; do echo Welcome to test pod container02; sleep 5 ; done"]
+```
 
 ```
 kind: Pod
