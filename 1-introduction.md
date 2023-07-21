@@ -71,26 +71,33 @@ _Here are the essential Kubernetes features:_
 
 ## Kubernetes Architecture
 
+A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one worker node.
+
+The worker node(s) host the Pods that are the components of the application workload. The control plane manages the worker nodes and the Pods in the cluster. 
+
 ![My Image](images/kubernetes-architecture.jpg)
 
-* Has a "this is what you'll learn" section.
-* Has a Table of Contents.
-* Has a section that brings up the app in the fewest number of
-  commands (TL;DR / quickstart), without cloning the repo (kubectl
-  apply -f http://...).
-* Points to documentation of prerequisites.
-  * [Create a cluster](https://github.com/kubernetes/community/blob/master/contributors/devel/running-locally.md) (e.g., single-node docker).
-  * [Setup kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-  * etc.
-* Should specify which release of Kubernetes is required and any other
-  prerequisites, such as DNS, a cloudprovider with PV provisioning, a
-  cloudprovider with external load balancers, etc.
-  * Point to general documentation about alternatives for those
-    mechanisms rather than present the alternatives in each example.
-  * Tries to balance between using new features, and being
-    compatible across environments.
+### Control Plane Components
 
-### Throughout
+The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
+
+It ensures that every component in the cluster is kept in the desired state. It receives data about internal cluster events, external systems, and third-party applications, then processes the data and makes and executes decisions in response.
+
+The control plane manages and maintains the worker nodes that hold the containerized applications. The control plane not only exposes the layer that deploys the containers, but also manages their lifecycle. 
+
+There are several key parts to the control plane:
+
+* An API server that transmits data both within the cluster and with external services
+* A scheduler that handles resource sharing among the nodes
+* A controller manager that watches the state of the nodes
+* A persistent data store to keep configurations
+* A controller manager and a cloud controller manager to manage control loops
+* All these components run on a node called the primary node or master node.
+
+#### Master Node
+
+
+
 
 * Should point to documentation on first mention:
   [kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/),
