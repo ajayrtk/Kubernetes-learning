@@ -49,7 +49,9 @@ _Here are the essential Kubernetes features:_
 * Offers enterprise-ready features
 * Application-centric management
 * Auto-scalable infrastructure
+* Service Discovery
 * Platform independent (cloud | virtual | physical)
+* Secret and Configuration Management
 * Offers environment consistency for development, testing, and production
 * Infrastructure is loosely coupled to each component can act as a separate unit
 
@@ -62,20 +64,9 @@ Demos that follow a script to show a Kubernetes feature in
 
 ## Kubernetes vs Docker Swarm:
 
-
-|Name | Description | Notable Features Used | 
-------------- | ------------- | ------------ | 
-|[Guestbook](guestbook/) | PHP app with Redis | Deployment, Service |
-|[Guestbook-Go](guestbook-go/) | Go app with Redis | Deployment, Service | 
-|[WordPress](mysql-wordpress-pd/) | WordPress with MySQL | Deployment, Persistent Volume with Claim | 
-|[Cassandra](cassandra/) | Cloud Native Cassandra | Daemon Set, Stateful Set, Replication Controller 
-
-> Note: Please add examples that are maintained to the list above.
-
-
 |Features | Kubernetes | Docker Swarm |
 ------------- | ------------- | ------------ | 
-| [Installation and Cluster configuration] (/) | Complicated and Time consuming | Fast and easy |
+| Installation and Cluster configuration | Complicated and Time consuming | Fast and easy |
 | Supports | Works with all container types - Rocket, Docker, ContainerD | Works with Docker only | 
 | GUI | Available | No GUI |
 | Data Volumes | Only shared with containers win same Pod | Can be shared with any other Container |
