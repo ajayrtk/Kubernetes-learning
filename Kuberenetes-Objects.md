@@ -3,6 +3,19 @@ Kubernetes is an open source container orchestration engine for automating deplo
 
 It schedules, runs and mananges isloated containers which are running on virtual | physical | cloud machnies.
 
+
+```
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: mypod                  
+spec:                                    
+  containers:                      
+    - name: cont01                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Welcome to Ubuntu machine - Container 01; sleep 5 ; done"]
+  restartPolicy: Never         # Defaults to Always
+```
 ## History
 
 * The name Kubernetes originates from Greek, meaning helmsman or pilot.
@@ -136,7 +149,7 @@ ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
 
 
-* Should point to documentation on first mention:
+* Should point to documentation on first mentio
   [kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/),
   [pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/),
   [services](https://kubernetes.io/docs/concepts/services-networking/service/),
