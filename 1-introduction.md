@@ -63,12 +63,12 @@ Demos that follow a script to show a Kubernetes feature in
 ## Kubernetes vs Docker Swarm:
 
 
-|Name | Description | Notable Features Used | Complexity Level|
-------------- | ------------- | ------------ | ------------ |
-|[Guestbook](guestbook/) | PHP app with Redis | Deployment, Service | Beginner |
-|[Guestbook-Go](guestbook-go/) | Go app with Redis | Deployment, Service | Beginner |
-|[WordPress](mysql-wordpress-pd/) | WordPress with MySQL | Deployment, Persistent Volume with Claim | Beginner|
-|[Cassandra](cassandra/) | Cloud Native Cassandra | Daemon Set, Stateful Set, Replication Controller | Intermediate
+|Name | Description | Notable Features Used | 
+------------- | ------------- | ------------ | 
+|[Guestbook](guestbook/) | PHP app with Redis | Deployment, Service |
+|[Guestbook-Go](guestbook-go/) | Go app with Redis | Deployment, Service | 
+|[WordPress](mysql-wordpress-pd/) | WordPress with MySQL | Deployment, Persistent Volume with Claim | 
+|[Cassandra](cassandra/) | Cloud Native Cassandra | Daemon Set, Stateful Set, Replication Controller 
 
 > Note: Please add examples that are maintained to the list above.
 
