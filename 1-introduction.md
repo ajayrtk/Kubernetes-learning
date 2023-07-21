@@ -71,7 +71,7 @@ Demos that follow a script to show a Kubernetes feature in
 | Data Volumes | Only shared with containers win same Pod | Can be shared with any other Container |
 | Updates and Rollbacks | Process scheduling to maintain services while updating | Progressive updates of servies health monitoring throught the update|
 | Autoscaling | Vertical and Horizontal | No support|
-| Logging and Monitoring | Inbuitl tool present |  Use third party like Splunk|
+| Logging and Monitoring | Inbuitl tool present |  Use third party like Splunk
 
 
 ### Up front
