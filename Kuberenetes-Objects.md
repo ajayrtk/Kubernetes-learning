@@ -1,7 +1,24 @@
-# What is Kubernetes
-Kubernetes is an open source container orchestration engine for automating deployment, scaling, and management of containerized applications. The open source project is hosted by the Cloud Native Computing Foundation (CNCF).
+# Kubernetes Objects
 
-It schedules, runs and mananges isloated containers which are running on virtual | physical | cloud machnies.
+They provide detailed instructions to Kubernetes on how the applications must be set up and managed.
+
+For example, a **Deployment** object might specify that you want three replicas of some application running at all times, while a **Service** object might define how you want to expose your application to the internet. 
+
+Kubernetes then takes these instructions and automatically configures and manages the application accordingly, ensuring that it always matches the desired state.
+
+Kubernetes uses objects to represent the state of the cluster. All objects are identified by a uniques name and a UID.
+
+## Types of Objects in Kubernetes
+There are many different types of Kubernetes objects.
+
+### 1. Pods
+* They are used to deploy, scale, and manage containerized applications in a cluster.
+* A Pod can host a single container or a group of containers that need to "sit closer together". By grouping two or more containers in a single Pod, they will be able to communicate much faster and share data more easily. 
+* When a Pod contains multiple containers, all of the containers always run on a single worker node. They never span across multiple worker nodes.
+* Pods is that they are ephemeral in nature. This means that they are not guaranteed to have a long-term lifespan. They can be created, destroyed, and recreated at any time if required.
+
+
+
 
 
 ```
@@ -101,6 +118,7 @@ kubectl exec testpod3 -it -c container03 -- /bin/bash
 #ps
 #ps -ef
 ```
+### Creating a pod with environment variable
 
 ```
 kind: Pod
@@ -113,23 +131,36 @@ spec:
       image: ubuntu
       command: ["/bin/bash", "-c", "while true; do echo Welcome to testpod04 container05; sleep 5 ; done"]
       env:                        # List of environment variables to be used inside the pod
-      - name: myname
+      - name: MYNAME
         value: Ajay Rawat
+```
+
+```
+kubectl get pods
+kubectl describe pod testpod4
+kubectl exec testpod4 -it -- /bin/bash
+#env
+# $MYNAME
 ```
 
 ```
 kind: Pod
 apiVersion: v1
 metadata:
-  name: testpod4
+  name: testpod5
 spec:
   containers:
-    - name: container05
+    - name: container06
       image: httpd
       ports:
        - containerPort: 80  
 ```
 
+```
+kubectl get pods
+kubectl get pods -o wide
+curl 10.244.0.32:80
+```
 ## History
 
 * The name Kubernetes originates from Greek, meaning helmsman or pilot.
