@@ -61,7 +61,7 @@ There are many different types of Kubernetes objects.
 * Once a namespace is created, we can launch Kubernetes objects, like Pods, which will only exist in that namespace.
 * By using namespaces, we can perform as many operations while eliminating the risk of impacting resources that are in another namespace. 
 
-### 9-10. ConfigMaps & 
+### 9. ConfigMaps
 * ConfigMaps objects allow to configure the apps that run in your Pods. 
 * Configuring apps refers to setting various parameters or options that control the behaviors of the apps. This can include things like database connection strings or API keys.
 * ConfigMaps are used to store non-sensitive configuration values. For example, environment variables used to provide runtime configuration information such as the URL of an external API.
@@ -73,9 +73,9 @@ There are many different types of Kubernetes objects.
 
 ### 11. Job
 * A job object is used to run specific tasks that have the following properties:
-  They are short-lived.
-  They need to be executed once.
-  Kubernetes has to make sure that the task has been executed correctly and finished its job.
+  * They are short-lived.
+  * They need to be executed once.
+  * Kubernetes has to make sure that the task has been executed correctly and finished its job.
 * An example of where a Kubernetes job can be useful is a database backup. It has to be executed once.
 
 ## How to create Pods
