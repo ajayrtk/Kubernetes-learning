@@ -37,65 +37,46 @@ There are many different types of Kubernetes objects.
 * When a Pod in a StatefulSet must be replaced, due to node failure, the new Pod is assigned the same numeric identifier as the previous Pod. This ensures that the new Pod has the same unique identity and is attached to the same persistent storage (Volume) that the previous Pod was using.
 
 ### 5. DaemonSets
-A DaemonSet ensures that a copy of a Pod is running across all, or a subset of nodes in a Kubernetes cluster.
-
-DaemonSets are useful for running system-level services, such as logging or monitoring agents, that need to run on every node in a cluster. Logging agents are used to collect log data from all the nodes in a cluster and send it to a centralized logging system for storage and analysis. Monitoring agents are used to collect metrics and performance data from all the nodes in a cluster, and send it to a monitoring system for analysis and alerting.
-
-Like ReplicaSets, DaemonSets are managed by a reconciliation loop. A reconciliation loop is a mechanism that continuously checks and compares the desired state of a resource with the current state. The loop runs periodically and ensures that the DaemonSet is always in the desired state, automatically creating or deleting Pods as necessary.
+* DaemonSet ensures that a copy of a Pod is running across all, or a subset of nodes in a Kubernetes cluster.
+* They are useful for running system-level services, such as logging or monitoring agents, that need to run on every node in a cluster. 
+* Logging agents are used to collect log data from all the nodes in a cluster and send it to a centralized logging system for storage and analysis. 
+* Monitoring agents are used to collect metrics and performance data from all the nodes in a cluster, and send it to a monitoring system for analysis and alerting.
+* Like ReplicaSets, DaemonSets are managed by a reconciliation loop. 
 
 ### 6. PersistentVolume
-PersistentVolume represents a piece of storage that you can attach to your Pod(s).
-
-The reason it's called "persistent" is because it's not tied to the life cycle of your Pod. In other words, even if your Pod gets deleted, the PersistentVolume will survive.
-
-And there are a lot of different types of storage that you can attach using a PersistentVolume, like local disks, network storage, and cloud storage.
-
-There are a few different use cases for PersistentVolumes in Kubernetes. One common use case is for databases. If you're running a database inside a Pod, you'll likely want to store the database files on a separate piece of storage that can persist even if the Pod gets deleted. And PersistentVolume can do that.
+* PersistentVolume represents a piece of storage that we can attach to Pod(s).
+* It's called "persistent" is because it's not tied to the life cycle of your Pod. Even if your Pod gets deleted, the PersistentVolume will survive.
+* Different types of storage we can attach using a PersistentVolume, like local disks, network storage, and cloud storage.
+* Use case - Databases, If a database is running inside a Pod, we'll likely want to store the database files on a separate piece of storage that can persist even if the Pod gets deleted. And PersistentVolume can do that.
 
 ### 7. Service
-A Kubernetes Service is a way to access a group of Pods that provide the same functionality. It creates a single, consistent point of entry for clients to access the service, regardless of the location of the Pods.
-
-For example, imagine you have a Kubernetes cluster with multiple Pods running a web application. Each Pod has its own IP address, but this can change at any time if the Pod is moved to another node, or recreated. So the IP address becomes a "moving target". The destination(s) that clients should reach is unstable, and hard to track.
-
-To make it easier for clients to access the web application, you can create a Kubernetes Service that has a stable IP address. Clients can then connect to that IP, and their requests will be routed to one of the Pods running the web application.
-
-One of the key benefits of using a Service is that it provides a stable endpoint that doesn't change even if the underlying Pods are recreated or replaced. This makes it much easier to update and maintain the application, as clients don't need to be updated with new IP addresses.
-
-Furthermore, the Service also provides some simple load balancing. If clients would connect to a certain IP address of a specific Pod, that Pod would be overused, while the other ones would be sitting idle, doing nothing. But the Service can spread out requests to multiple Pods (load balance). By spreading these out, all Pods are used equally. However, each one has less work to do, as it only receives a small part of the total number of incoming requests.
+* Service is a way to access a group of Pods that provide the same functionality. 
+* It creates a single, consistent point of entry for clients to access the service, regardless of the location of the Pods.
+* It provides a stable endpoint that doesn't change even if the underlying Pods are recreated or replaced. This makes it much easier to update and maintain the application, as clients don't need to be updated with new IP addresses.
+* Service can spread out requests to multiple Pods (load balance). By spreading these out, all Pods are used equally.
 
 ### 8. Namespaces
-A Kubernetes namespace is a way to divide a single Kubernetes cluster into multiple virtual clusters. This allows resources to be isolated from one another. Once a namespace is created, you can launch Kubernetes objects, like Pods, which will only exist in that namespace.
+* A Kubernetes namespace is a way to divide a single Kubernetes cluster into multiple virtual clusters. 
+* It allows resources to be isolated from one another. 
+* Once a namespace is created, we can launch Kubernetes objects, like Pods, which will only exist in that namespace.
+* By using namespaces, we can perform as many operations while eliminating the risk of impacting resources that are in another namespace. 
 
-For example, imagine you have a Kubernetes cluster running two applications, "AppA" and "AppB". To keep things organized, you create two namespaces, "AppA-Namespace" and "AppB-Namespace".
+### 9-10. ConfigMaps & 
+* ConfigMaps objects allow to configure the apps that run in your Pods. 
+* Configuring apps refers to setting various parameters or options that control the behaviors of the apps. This can include things like database connection strings or API keys.
+* ConfigMaps are used to store non-sensitive configuration values. For example, environment variables used to provide runtime configuration information such as the URL of an external API.
 
-Now, when you deploy Pods for "AppA", you can do so within the "AppA-Namespace". Similarly, when you deploy Pods for "AppB", you can do so within the "AppB-Namespace". What's a possible use case?
-
-Well, imagine AppA, and AppB are almost identical. One is version 1.16 of an app, the other is version 1.17. They use almost the same objects, the same Pod structures, the same Services, and so on. Since they're so similar, there's a risk of them interfering with each other. For example, AppA might accidentally send requests to a similar Service or Pod used by AppB. But you want to test the new 1.17 version in a realistic scenario in the same cluster, using the same objects and definitions.
-
-By using namespaces, you can perform as many operations as you need while eliminating the risk of impacting resources that are in another namespace. It's almost as if you have a second Kubernetes cluster. AppA runs in its own (virtual) cluster. AppB runs in a separate (virtual) cluster. But you don't actually have to go through the trouble of setting up an additional cluster. AppA and AppB are logically isolated from each other when they exist in separate namespaces. Even if they run identical Pods that want to access Services with identical names, there's no risk of them interfering with each other.
-
-### 9-10. ConfigMaps & Secrets
-ConfigMaps and Secrets are two very important objects that allow you to configure the apps that run in your Pods. Configuring apps refers to setting various parameters or options that control the behaviors of the apps. This can include things like database connection strings or API keys.
-
-ConfigMaps are used to store non-sensitive configuration values. For example, environment variables used to provide runtime configuration information such as the URL of an external API, rather than confidential information such as passwords, are considered non-sensitive data.
-
-Secrets, on the other hand, are meant to hold sensitive configuration values, such as database passwords, API keys, and other information that only authorized apps should be able to access.
-
-ConfigMaps and Secrets can be injected into Pods with the help of environment variables, command-line arguments, or configuration files included in the volumes attached to those Pods.
-
-By using ConfigMaps and Secrets, you decouple the applications running in your Pods from their configuration values. This means you can easily update the configuration of your applications without having to rebuild or redeploy them.
+### 10. Secrets
+* Secrets are meant to hold sensitive configuration values, such as database passwords, API keys, and other information that only authorized apps should be able to access.
+* ConfigMaps and Secrets can be injected into Pods with the help of environment variables, command-line arguments, or configuration files included in the volumes attached to those Pods.
+* ConfigMaps and Secrets decouple the applications running in Pods from their configuration values. This means we can easily update the configuration of applications without having to rebuild or redeploy them.
 
 ### 11. Job
-A job object is used to run specific tasks that have the following properties:
-
-They are short-lived.
-They need to be executed once.
-But most importantly, Kubernetes has to make sure that the task has been executed correctly and finished its job.
-An example of where a Kubernetes job can be useful is a database backup. This does not run continuously, so it's a short-lived process. It just needs to start, complete, then exit. It has to be executed once. Even if the backup needs to happen weekly, there will be one separate job per week (CronJobs can be used for jobs that repeat periodically).
-
-Each job has to finish its own weekly task. But it needs to ensure that the Pod executing the backup fully completes this job. For example, a Pod might start a backup. But the database is huge, so this can take hours. For some reason, the backup process fails at 68% progress. Kubernetes sees that the Pod has failed the task, so it can create another one to retry. It will keep on retrying until, finally, one Pod manages to back up the entire database.
-
-In this case, the job required one Pod, and one successful run for one Pod (to ensure the task was completed successfully). But other jobs might require multiple Pods (which can run in parallel) and/or multiple successful runs. For example, a job will be considered complete, only when at least 3 Pods had successful runs and achieved 100% progress on their tasks.
+* A job object is used to run specific tasks that have the following properties:
+  They are short-lived.
+  They need to be executed once.
+  Kubernetes has to make sure that the task has been executed correctly and finished its job.
+* An example of where a Kubernetes job can be useful is a database backup. It has to be executed once.
 
 ## How to create Pods
 
@@ -114,39 +95,35 @@ spec:
   restartPolicy: Never         # Defaults to Always
 ```
 
-### Create a pod with the help of yaml file
+#### Create a pod with the help of yaml file
 ```
 kubectl apply -f pod1.yaml
 ```
 
-### Get the details of the pod with more columns
+#### Get the details of the pod with more columns
 
 ```
 kubectl get pods -o wide 
 ```
 
-### Get the detail description of the pod
-
+#### Get the detail description of the pod
 ``` 
  kubectl describe pod testpod1
 ```
 
-### Get the logs of the container
-
+#### Get the logs of the container
 ```
  kubectl logs -f testpod1
 ```
 
-### Get the logs of the specific container if multiple container is running inside the pod
-
+#### Get the logs of the specific container if multiple container is running inside the pod
 ``` 
  kubectl logs -f testpod1 -c container01
 ```
-### Delete a container
+#### Delete a container
 ```
 kubectl delete pods testpod1
 kubectl delete -f pod1.yaml
-
 ```
 
 ### Creating a container with annotation
