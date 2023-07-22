@@ -14,12 +14,12 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## Online platforms for K8s
 
-* Kunernetes playground
 * Play with K8s
+* Kunernetes playground
 * Play with Kubernetes classroom
 
 ## Managed Kubernetes Cluster in the Cloud
-_The top managed Kubernetes offerings include the following:_
+The top managed Kubernetes offerings include the following:
 
 * Google Kubernetes Engine (GKE)
 * Azure Kubernetes Service (AKS)
@@ -37,7 +37,7 @@ _The top managed Kubernetes offerings include the following:_
 
 ## Feature of Kubernetes
 
-_Here are the essential Kubernetes features:_
+Here are the essential Kubernetes features:
 
 * Orchestration (cluster of any number of container running on different network)
 * Automated Scheduling
@@ -80,13 +80,10 @@ The worker node(s) host the Pods that are the components of the application work
 
 
 
-![My Image](images/pod.jpg)
-
-![My Image](images/nodes.jpg)
 
 <img src="images/pod.jpg" width=70% height=70%>
 
-<img src="images/nodes.jpg" width=45% height=45%>
+<img src="images/nodes.jpg" width=35% height=35%>
 
 
 
@@ -106,7 +103,7 @@ The control plane manages and maintains the worker nodes that hold the container
 
 There are several key parts to the control plane:
 
-![My Image](images/control_plane.jpg)
+<img src="images/control_plane.jpg" width=80% height=80%>
 
 * kube-apiserver - An API server that transmits data both within the cluster and with external services
 * kube-scheduler - A scheduler that handles resource sharing among the nodes
@@ -136,11 +133,6 @@ There are several key parts to the control plane:
 Factors taken into account for scheduling decisions include: individual and collective resource requirements, hardware/software/policy constraints, affinity and anti-affinity specifications, data locality, inter-workload interference, and deadlines.
 
 
-
-
-
-
-
 Control plane component that runs controller processes.
 
 Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
@@ -152,12 +144,12 @@ Job controller: Watches for Job objects that represent one-off tasks, then creat
 EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
 ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
-![My Image](images/data_plane.jpg)
-
+<img src="images/data_plane.jpg" width=80% height=80%>
 
 ## How Kubernetes runs an application
 
-![My Image](images/deploying_application.jpg)
+<img src="images/deploying_application.jpg" width=80% height=80%>
+
 
 _These actions take place when you deploy the application:_
 1. You submit the application manifest to the Kubernetes API. The API Server writes the objects defined in the manifest to etcd.
