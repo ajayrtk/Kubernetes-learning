@@ -83,7 +83,7 @@ The worker node(s) host the Pods that are the components of the application work
 
 <img src="images/pod.jpg" width=70% height=70%>
 
-<img src="images/nodes.jpg" width=35% height=35%>
+<img src="images/nodes.jpg" width=45% height=45%>
 
 
 
@@ -93,7 +93,8 @@ The worker node(s) host the Pods that are the components of the application work
 
 ### Control Plane Components
 
-![My Image](images/two_planes.jpg)
+
+<img src="images/two_planes.jpg" width=80% height=80%>
 
 The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
 
