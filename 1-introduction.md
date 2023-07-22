@@ -5,7 +5,9 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## History
 
-* The name Kubernetes originates from Greek, meaning helmsman or pilot.
+![My Image](images/kubernetes_history.jpg)
+
+* The word Kubernetes is Greek for pilot or helmsman, the person who steers the ship.
 * Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
  and services on this cluster.
 * In 2014, Google introduced Kubernetes an open source platform written in Golang and later denoated to CNCF.
@@ -77,6 +79,24 @@ The worker node(s) host the Pods that are the components of the application work
 
 ![My Image](images/kubernetes-architecture.jpg)
 
+![My Image](images/two_planes.jpg)
+
+![My Image](images/control_plane.jpg)
+
+![My Image](images/data_plane.jpg)
+
+![My Image](images/pods.jpg)
+
+![My Image](images/nodes.jpg)
+
+
+
+
+
+
+
+
+
 ### Control Plane Components
 
 The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
@@ -131,51 +151,31 @@ Job controller: Watches for Job objects that represent one-off tasks, then creat
 EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
 ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
+## How Kubernetes runs an application
+
+![My Image](images/deploying_application.jpg)
+
+_These actions take place when you deploy the application:_
+1. You submit the application manifest to the Kubernetes API. The API Server writes the objects defined in the manifest to etcd.
+2. A controller notices the newly created objects and creates several new objects - one for each application instance.
+3. The Scheduler assigns a node to each instance.
+4. The Kubelet notices that an instance is assigned to the Kubelet’s node. It runs the application instance via the Container   
+  Runtime.
+5. The Kube Proxy notices that the application instances are ready to accept connections from clients and configures a load balancer for them.
+6. The Kubelets and the Controllers monitor the system and keep the applications running.
+
+
+## Deploying a Kubernetes cluster
+
+### Kubernetes running in Docker Desktop
+![My Image](images/docker_desktop.jpg)
+
+### Running a single-node Kubernetes cluster using Minikube
+![My Image](images/minikube.jpg)
+
+### Running a multi-node Kubernetes cluster using kind
+![My Image](images/kind.jpg)
+
+
+
 #### Master Node
-
-
-
-
-* Should point to documentation on first mentio
-  [kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/),
-  [pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/),
-  [services](https://kubernetes.io/docs/concepts/services-networking/service/),
-  [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/),
-  [replication controllers](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/),
-  [jobs](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/),
-  [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/),
-  [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/),
-  etc.
-* Most examples should be cloudprovider-independent (e.g., using PVCs, not PDs).
-  * Other examples with cloudprovider-specific bits could be somewhere else.
-* Actually show the app working -- console output, and or screenshots.
-  * Ascii animations and screencasts are recommended.
-* Follows [config best practices](https://kubernetes.io/docs/concepts/configuration/overview/).
-* Shouldn't duplicate the [user guide](https://kubernetes.io/docs/home/).
-* Docker images are pre-built, and source is contained in a subfolder.
-  * Source is the Dockerfile and any custom files needed beyond the
-    upstream app being packaged.
-  * Images are pushed to `gcr.io/google-samples`. Contact @jeffmendoza
-    to have an image pushed
-  * Images are tagged with a version (not latest) that is referenced
-    in the example config.
-* Only use the code highlighting types
-  [supported by Rouge](https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers),
-  as this is what GitHub Pages uses.
-* Commands to be copied using the `shell` syntax highlighting type, and
-  do not include any kind of prompt.
-* Example output is in a separate block quote to distinguish it from
-  the command (which doesn't have a prompt).
-* When providing an example command or config for which the user is
-  expected to substitute text with something specific to them, use
-  angle brackets: `<IDENTIFIER>` for the text to be substituted.
-
-### At the end
-
-* Should have a section suggesting what to look at next, both in terms
-  of "additional resources" and "what example to look at next".
-
-
-<!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
-[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/guidelines.md?pixel)]()
-<!-- END MUNGE: GENERATED_ANALYTICS -->
