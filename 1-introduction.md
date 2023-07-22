@@ -158,7 +158,7 @@ In addition to applications, several Kubernetes components also run on these nod
   * It uses the CNI plugin configured in the cluster to allocate the pod IP address and set up any necessary network routes and
     firewall rules for the pod.
 
-<img src="images/kubelet.jpg" width=60% height=40%>
+<img src="images/kubelet.jpg" width=40% height=250%>
 
 2. **Container Runtime**
 
