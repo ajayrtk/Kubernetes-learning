@@ -5,7 +5,7 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## History
 
-![My Image](images/kubernetes_history.jpg)
+![My Image](images/kubernetes_history.jpg | | width=100) 
 
 * The word Kubernetes is Greek for pilot or helmsman, the person who steers the ship.
 * Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
@@ -80,10 +80,9 @@ The worker node(s) host the Pods that are the components of the application work
 
 
 
-![My Image](images/pods.jpg)
+![My Image](images/pod.jpg)
 
 ![My Image](images/nodes.jpg)
-
 
 
 
