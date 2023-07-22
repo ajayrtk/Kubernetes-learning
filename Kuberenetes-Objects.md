@@ -17,9 +17,89 @@ There are many different types of Kubernetes objects.
 * When a Pod contains multiple containers, all of the containers always run on a single worker node. They never span across multiple worker nodes.
 * Pods is that they are ephemeral in nature. This means that they are not guaranteed to have a long-term lifespan. They can be created, destroyed, and recreated at any time if required.
 
+### 2. Deployment
+* It is used to manage the lifecycle of one or more identical Pods. 
+* It allows to declaratively manage the desired state of your application, such as the number of replicas, the image to use for the Pods, and the resources required. 
+* Deployment creates Pods that match template, using a ReplicaSet. A ReplicaSet is responsible for creating and scaling Pods, and for ensuring that Pods that fail are replaced.
+* Deployment objects are used to manage stateless applications. 
 
+### 3. ReplicaSets
+* Deployments don’t manage Pods directly. That’s the job of the ReplicaSet object. 
+* When we create a Deployment a ReplicaSet is created automatically. 
+* It ensures that the desired number of replicas are running at all times by creating or deleting Pods as needed.  
+* To accomplish this, Kubernetes uses a concept called reconciliation loops. A reconciliation loop is a process that compares    the desired state of a system with its current state and takes actions to bring the current state in line with the desired state.
 
+### 4. StatefulSet
+* StatefulSet object is used to manage stateful applications. 
+* The word "state" means any stored data that the application or component needs to do its work. 
+* This state is typically stored in a persistent storage backend, such as a disk, or a database. And the state is maintained even if the underlying Pods/containers are recreated. 
+* StatefulSet ensures that each Pod is uniquely identified by a number, starting at zero. This allows for a consistent naming scheme for each Pod and its associated resources, such as persistent storage (for example, when Volumes are used).
+* When a Pod in a StatefulSet must be replaced, due to node failure, the new Pod is assigned the same numeric identifier as the previous Pod. This ensures that the new Pod has the same unique identity and is attached to the same persistent storage (Volume) that the previous Pod was using.
 
+### 5. DaemonSets
+A DaemonSet ensures that a copy of a Pod is running across all, or a subset of nodes in a Kubernetes cluster.
+
+DaemonSets are useful for running system-level services, such as logging or monitoring agents, that need to run on every node in a cluster. Logging agents are used to collect log data from all the nodes in a cluster and send it to a centralized logging system for storage and analysis. Monitoring agents are used to collect metrics and performance data from all the nodes in a cluster, and send it to a monitoring system for analysis and alerting.
+
+Like ReplicaSets, DaemonSets are managed by a reconciliation loop. A reconciliation loop is a mechanism that continuously checks and compares the desired state of a resource with the current state. The loop runs periodically and ensures that the DaemonSet is always in the desired state, automatically creating or deleting Pods as necessary.
+
+### 6. PersistentVolume
+PersistentVolume represents a piece of storage that you can attach to your Pod(s).
+
+The reason it's called "persistent" is because it's not tied to the life cycle of your Pod. In other words, even if your Pod gets deleted, the PersistentVolume will survive.
+
+And there are a lot of different types of storage that you can attach using a PersistentVolume, like local disks, network storage, and cloud storage.
+
+There are a few different use cases for PersistentVolumes in Kubernetes. One common use case is for databases. If you're running a database inside a Pod, you'll likely want to store the database files on a separate piece of storage that can persist even if the Pod gets deleted. And PersistentVolume can do that.
+
+### 7. Service
+A Kubernetes Service is a way to access a group of Pods that provide the same functionality. It creates a single, consistent point of entry for clients to access the service, regardless of the location of the Pods.
+
+For example, imagine you have a Kubernetes cluster with multiple Pods running a web application. Each Pod has its own IP address, but this can change at any time if the Pod is moved to another node, or recreated. So the IP address becomes a "moving target". The destination(s) that clients should reach is unstable, and hard to track.
+
+To make it easier for clients to access the web application, you can create a Kubernetes Service that has a stable IP address. Clients can then connect to that IP, and their requests will be routed to one of the Pods running the web application.
+
+One of the key benefits of using a Service is that it provides a stable endpoint that doesn't change even if the underlying Pods are recreated or replaced. This makes it much easier to update and maintain the application, as clients don't need to be updated with new IP addresses.
+
+Furthermore, the Service also provides some simple load balancing. If clients would connect to a certain IP address of a specific Pod, that Pod would be overused, while the other ones would be sitting idle, doing nothing. But the Service can spread out requests to multiple Pods (load balance). By spreading these out, all Pods are used equally. However, each one has less work to do, as it only receives a small part of the total number of incoming requests.
+
+### 8. Namespaces
+A Kubernetes namespace is a way to divide a single Kubernetes cluster into multiple virtual clusters. This allows resources to be isolated from one another. Once a namespace is created, you can launch Kubernetes objects, like Pods, which will only exist in that namespace.
+
+For example, imagine you have a Kubernetes cluster running two applications, "AppA" and "AppB". To keep things organized, you create two namespaces, "AppA-Namespace" and "AppB-Namespace".
+
+Now, when you deploy Pods for "AppA", you can do so within the "AppA-Namespace". Similarly, when you deploy Pods for "AppB", you can do so within the "AppB-Namespace". What's a possible use case?
+
+Well, imagine AppA, and AppB are almost identical. One is version 1.16 of an app, the other is version 1.17. They use almost the same objects, the same Pod structures, the same Services, and so on. Since they're so similar, there's a risk of them interfering with each other. For example, AppA might accidentally send requests to a similar Service or Pod used by AppB. But you want to test the new 1.17 version in a realistic scenario in the same cluster, using the same objects and definitions.
+
+By using namespaces, you can perform as many operations as you need while eliminating the risk of impacting resources that are in another namespace. It's almost as if you have a second Kubernetes cluster. AppA runs in its own (virtual) cluster. AppB runs in a separate (virtual) cluster. But you don't actually have to go through the trouble of setting up an additional cluster. AppA and AppB are logically isolated from each other when they exist in separate namespaces. Even if they run identical Pods that want to access Services with identical names, there's no risk of them interfering with each other.
+
+### 9-10. ConfigMaps & Secrets
+ConfigMaps and Secrets are two very important objects that allow you to configure the apps that run in your Pods. Configuring apps refers to setting various parameters or options that control the behaviors of the apps. This can include things like database connection strings or API keys.
+
+ConfigMaps are used to store non-sensitive configuration values. For example, environment variables used to provide runtime configuration information such as the URL of an external API, rather than confidential information such as passwords, are considered non-sensitive data.
+
+Secrets, on the other hand, are meant to hold sensitive configuration values, such as database passwords, API keys, and other information that only authorized apps should be able to access.
+
+ConfigMaps and Secrets can be injected into Pods with the help of environment variables, command-line arguments, or configuration files included in the volumes attached to those Pods.
+
+By using ConfigMaps and Secrets, you decouple the applications running in your Pods from their configuration values. This means you can easily update the configuration of your applications without having to rebuild or redeploy them.
+
+### 11. Job
+A job object is used to run specific tasks that have the following properties:
+
+They are short-lived.
+They need to be executed once.
+But most importantly, Kubernetes has to make sure that the task has been executed correctly and finished its job.
+An example of where a Kubernetes job can be useful is a database backup. This does not run continuously, so it's a short-lived process. It just needs to start, complete, then exit. It has to be executed once. Even if the backup needs to happen weekly, there will be one separate job per week (CronJobs can be used for jobs that repeat periodically).
+
+Each job has to finish its own weekly task. But it needs to ensure that the Pod executing the backup fully completes this job. For example, a Pod might start a backup. But the database is huge, so this can take hours. For some reason, the backup process fails at 68% progress. Kubernetes sees that the Pod has failed the task, so it can create another one to retry. It will keep on retrying until, finally, one Pod manages to back up the entire database.
+
+In this case, the job required one Pod, and one successful run for one Pod (to ensure the task was completed successfully). But other jobs might require multiple Pods (which can run in parallel) and/or multiple successful runs. For example, a job will be considered complete, only when at least 3 Pods had successful runs and achieved 100% progress on their tasks.
+
+## How to create Pods
+
+### Examples of Pod creation
 
 ```
 kind: Pod                              
@@ -35,7 +115,6 @@ spec:
 ```
 
 ### Create a pod with the help of yaml file
-
 ```
 kubectl apply -f pod1.yaml
 ```
@@ -161,179 +240,3 @@ kubectl get pods
 kubectl get pods -o wide
 curl 10.244.0.32:80
 ```
-## History
-
-* The name Kubernetes originates from Greek, meaning helmsman or pilot.
-* Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
- and services on this cluster.
-* In 2014, Google introduced Kubernetes an open source platform written in Golang and later denoated to CNCF.
-
-## Online platforms for K8s
-
-* Kunernetes playground
-* Play with K8s
-* Play with Kubernetes classroom
-
-## Cloud based K8s services
-
-* GKE - Google Kubernetes services
-* AKS - Azure Kubernetes services
-* Amazon EKS - Elastic Kubernetes services
-
-## Kubernetes Installation Tools
-
-* Minicube
-* Kubeadm
-* Kind
-
-## Problems with Scaling up the Containers
-
-* Containers cannot communicate with each other
-* Autoscaling and laod balancing was not possible
-* Contianers had to be managed carefully
-
-## Feature of Kubernetes
-
-_Here are the essential Kubernetes features:_
-
-* Orchestration (cluster of any number of container running on different network)
-* Automated Scheduling
-* Self-Healing Capabilities
-* Automated rollouts & rollback
-* Horizontal Scaling 
-* Load Balancing
-* Fault tolerance (Node | Pod failure)
-* Health monitoring of containers
-* Offers enterprise-ready features
-* Application-centric management
-* Auto-scalable infrastructure
-* Service Discovery
-* Platform independent (cloud | virtual | physical)
-* Secret and Configuration Management
-* Offers environment consistency for development, testing, and production
-* Infrastructure is loosely coupled to each component can act as a separate unit
-
-
-## Kubernetes vs Docker Swarm
-
-|Features | Kubernetes | Docker Swarm |
-------------- | ------------- | ------------ | 
-| Installation and Cluster configuration | Complicated and Time consuming | Fast and easy |
-| Supports | Works with all container types - Rocket, Docker, ContainerD | Works with Docker only | 
-| GUI | Available | No GUI |
-| Data Volumes | Only shared with containers win same Pod | Can be shared with any other Container |
-| Updates and Rollbacks | Process scheduling to maintain services while updating | Progressive updates of servies health monitoring throught the update|
-| Autoscaling | Vertical and Horizontal | No support|
-| Logging and Monitoring | Inbuitl tool present |  Use third party like Splunk
-
-
-## Kubernetes Architecture
-
-A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one worker node.
-
-The worker node(s) host the Pods that are the components of the application workload. The control plane manages the worker nodes and the Pods in the cluster. 
-
-![My Image](images/kubernetes-architecture.jpg)
-
-### Control Plane Components
-
-The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
-
-It ensures that every component in the cluster is kept in the desired state. It receives data about internal cluster events, external systems, and third-party applications, then processes the data and makes and executes decisions in response.
-
-The control plane manages and maintains the worker nodes that hold the containerized applications. The control plane not only exposes the layer that deploys the containers, but also manages their lifecycle. 
-
-There are several key parts to the control plane:
-
-* kube-apiserver - An API server that transmits data both within the cluster and with external services
-* kube-scheduler - A scheduler that handles resource sharing among the nodes
-* kube-controller-manager - A controller manager that watches the state of the nodes
-* etcd - A persistent data store to keep configurations
-* cloud-controller-manager - A controller manager and a cloud controller manager to manage control loops
-
-1. **kube-apiserver**
-
-* Central hub of the Kubernetes cluster that exposes the Kubernetes API
-* Only way to interact with a running Kubernetes cluster
-* Can issue commands to the API server using the Kubectl CLI or an HTTP client
-* As front end of the Kubernetes API, it serves as the access point for client requests
-* Designed to scale horizontally — scales by deploying more instances
-* The communication between the API server and other components in the cluster happens over TLS to prevent unauthorized access to the cluster
-* API management: Exposes the cluster API endpoint and handles all API requests.
-* Authentication (Using client certificates, bearer tokens, and HTTP Basic Authentication) and Authorization (ABAC and RBAC and
- evaluation)
-* Processing API requests and validating data for the API objects like pods, services, etc. (Validation and Mutation Admission controllers)
-* It is the only component that communicates with etcd
-* Coordinates all the processes between the control plane and worker node components
-
-2. **kube-scheduler**
-
-* Watches newly created Pods with no assigned node, and selects a node for them to run on.
-* 
-Factors taken into account for scheduling decisions include: individual and collective resource requirements, hardware/software/policy constraints, affinity and anti-affinity specifications, data locality, inter-workload interference, and deadlines.
-
-
-
-
-
-
-
-Control plane component that runs controller processes.
-
-Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
-
-There are many different types of controllers. Some examples of them are:
-
-Node controller: Responsible for noticing and responding when nodes go down.
-Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those tasks to completion.
-EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
-ServiceAccount controller: Create default ServiceAccounts for new namespaces.
-
-#### Master Node
-
-
-
-
-* Should point to documentation on first mentio
-  [kubectl](https://kubernetes.io/docs/user-guide/kubectl-overview/),
-  [pods](https://kubernetes.io/docs/concepts/workloads/pods/pod/),
-  [services](https://kubernetes.io/docs/concepts/services-networking/service/),
-  [deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/),
-  [replication controllers](https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/),
-  [jobs](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/),
-  [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/),
-  [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/),
-  etc.
-* Most examples should be cloudprovider-independent (e.g., using PVCs, not PDs).
-  * Other examples with cloudprovider-specific bits could be somewhere else.
-* Actually show the app working -- console output, and or screenshots.
-  * Ascii animations and screencasts are recommended.
-* Follows [config best practices](https://kubernetes.io/docs/concepts/configuration/overview/).
-* Shouldn't duplicate the [user guide](https://kubernetes.io/docs/home/).
-* Docker images are pre-built, and source is contained in a subfolder.
-  * Source is the Dockerfile and any custom files needed beyond the
-    upstream app being packaged.
-  * Images are pushed to `gcr.io/google-samples`. Contact @jeffmendoza
-    to have an image pushed
-  * Images are tagged with a version (not latest) that is referenced
-    in the example config.
-* Only use the code highlighting types
-  [supported by Rouge](https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers),
-  as this is what GitHub Pages uses.
-* Commands to be copied using the `shell` syntax highlighting type, and
-  do not include any kind of prompt.
-* Example output is in a separate block quote to distinguish it from
-  the command (which doesn't have a prompt).
-* When providing an example command or config for which the user is
-  expected to substitute text with something specific to them, use
-  angle brackets: `<IDENTIFIER>` for the text to be substituted.
-
-### At the end
-
-* Should have a section suggesting what to look at next, both in terms
-  of "additional resources" and "what example to look at next".
-
-
-<!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
-[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/guidelines.md?pixel)]()
-<!-- END MUNGE: GENERATED_ANALYTICS -->
