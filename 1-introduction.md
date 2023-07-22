@@ -5,7 +5,7 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## History
 
-![My Image](images/kubernetes_history.jpg | width=100) 
+![My Image](images/kubernetes_history.jpg)
 
 * The word Kubernetes is Greek for pilot or helmsman, the person who steers the ship.
 * Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
