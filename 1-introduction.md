@@ -36,7 +36,6 @@ The top managed Kubernetes offerings include the following:
 * Contianers had to be managed carefully
 
 ## Feature of Kubernetes
-
 Here are the essential Kubernetes features:
 
 * Orchestration (cluster of any number of container running on different network)
@@ -72,28 +71,13 @@ Here are the essential Kubernetes features:
 
 ## Kubernetes Architecture
 
-A Kubernetes cluster consists of a set of worker machines, called nodes, that run containerized applications. Every cluster has at least one worker node.
+A set of master nodes that host the Control Plane components, which are the brains of the system, since they control the entire cluster. The control plane manages the worker nodes and the Pods in the cluster. 
 
-The worker node(s) host the Pods that are the components of the application workload. The control plane manages the worker nodes and the Pods in the cluster. 
+A set of worker nodes that form the Workload Plane, which is where your workloads (or applications) run. The worker node(s) host the Pods that are the components of the application workload. 
 
-![My Image](images/kubernetes-architecture.jpg)
-
-
-
-
-<img src="images/pod.jpg" width=70% height=70%>
-
-<img src="images/nodes.jpg" width=45% height=45%>
-
-
-
-
-
-
+<img src="images/kubernetes-architecture.jpg" width=100% height=100%>
 
 ### Control Plane Components
-
-
 <img src="images/two_planes.jpg" width=80% height=80%>
 
 The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 

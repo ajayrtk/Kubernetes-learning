@@ -9,13 +9,16 @@ Kubernetes then takes these instructions and automatically configures and manage
 Kubernetes uses objects to represent the state of the cluster. All objects are identified by a uniques name and a UID.
 
 ## Types of Objects in Kubernetes
-_There are many different types of Kubernetes objects._
+There are many different types of Kubernetes objects.
 
 ### 1. Pods
 * They are used to deploy, scale, and manage containerized applications in a cluster.
 * A Pod can host a single container or a group of containers that need to "sit closer together". By grouping two or more containers in a single Pod, they will be able to communicate much faster and share data more easily. 
 * When a Pod contains multiple containers, all of the containers always run on a single worker node. They never span across multiple worker nodes.
 * Pods is that they are ephemeral in nature. This means that they are not guaranteed to have a long-term lifespan. They can be created, destroyed, and recreated at any time if required.
+<img src="images/pod.jpg" width=70% height=70%>
+
+<img src="images/nodes.jpg" width=45% height=45%>
 
 ### 2. Deployment
 * It is used to manage the lifecycle of one or more identical Pods. 
