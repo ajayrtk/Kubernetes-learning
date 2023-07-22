@@ -86,7 +86,7 @@ The worker node(s) host the Pods that are the components of the application work
 
 <img src="images/pod.jpg" width=70% height=70%>
 
-<img src="images/nodes.jpg" width=30% height=30%>
+<img src="images/nodes.jpg" width=45% height=45%>
 
 
 
