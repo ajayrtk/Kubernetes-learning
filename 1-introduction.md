@@ -5,7 +5,7 @@ It schedules, runs and mananges isloated containers which are running on virtual
 
 ## History
 
-<img src="images/kubernetes_history.jpg" width=80% height=80%>
+<img src="images/kubernetes_history.jpg" width=85% height=85%>
 
 * The word Kubernetes is Greek for pilot or helmsman, the person who steers the ship.
 * Google developed an internal system called 'Borg' (later named as 'Omega') to deply and manage thousands Google applications 
@@ -149,7 +149,7 @@ ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
 ## How Kubernetes runs an application
 
-<img src="images/deploying_application.jpg" width=80% height=80%>
+<img src="images/deploying_application.jpg" width=85% height=85%>
 
 
 _These actions take place when you deploy the application:_
@@ -164,13 +164,13 @@ _These actions take place when you deploy the application:_
 ## Deploying a Kubernetes cluster
 
 ### Kubernetes running in Docker Desktop
-![My Image](images/docker_desktop.jpg)
+<img src="images/docker_desktop.jpg" width=80% height=80%>
 
 ### Running a single-node Kubernetes cluster using Minikube
-![My Image](images/minikube.jpg)
+<img src="images/minikube.jpg" width=80% height=80%>
 
 ### Running a multi-node Kubernetes cluster using kind
-![My Image](images/kind.jpg)
+<img src="images/kind.jpg" width=80% height=80%>
 
 
 
