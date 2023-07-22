@@ -29,12 +29,6 @@ _The top managed Kubernetes offerings include the following:_
 * VMware Cloud PKS
 * Alibaba Cloud Container Service for Kubernetes (ACK)
 
-## Kubernetes Installation Tools
-
-* Minicube
-* Kubeadm
-* Kind
-
 ## Problems with Scaling up the Containers
 
 * Containers cannot communicate with each other
@@ -84,11 +78,7 @@ The worker node(s) host the Pods that are the components of the application work
 
 ![My Image](images/kubernetes-architecture.jpg)
 
-![My Image](images/two_planes.jpg)
 
-![My Image](images/control_plane.jpg)
-
-![My Image](images/data_plane.jpg)
 
 ![My Image](images/pods.jpg)
 
@@ -104,6 +94,8 @@ The worker node(s) host the Pods that are the components of the application work
 
 ### Control Plane Components
 
+![My Image](images/two_planes.jpg)
+
 The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
 
 It ensures that every component in the cluster is kept in the desired state. It receives data about internal cluster events, external systems, and third-party applications, then processes the data and makes and executes decisions in response.
@@ -111,6 +103,8 @@ It ensures that every component in the cluster is kept in the desired state. It 
 The control plane manages and maintains the worker nodes that hold the containerized applications. The control plane not only exposes the layer that deploys the containers, but also manages their lifecycle. 
 
 There are several key parts to the control plane:
+
+![My Image](images/control_plane.jpg)
 
 * kube-apiserver - An API server that transmits data both within the cluster and with external services
 * kube-scheduler - A scheduler that handles resource sharing among the nodes
@@ -156,6 +150,9 @@ Job controller: Watches for Job objects that represent one-off tasks, then creat
 EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
 ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
+![My Image](images/data_plane.jpg)
+
+
 ## How Kubernetes runs an application
 
 ![My Image](images/deploying_application.jpg)
@@ -168,7 +165,6 @@ _These actions take place when you deploy the application:_
   Runtime.
 5. The Kube Proxy notices that the application instances are ready to accept connections from clients and configures a load balancer for them.
 6. The Kubelets and the Controllers monitor the system and keep the applications running.
-
 
 ## Deploying a Kubernetes cluster
 
