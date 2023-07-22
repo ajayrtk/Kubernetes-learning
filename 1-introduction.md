@@ -75,19 +75,18 @@ A set of master nodes that host the Control Plane components, which are the brai
 
 A set of worker nodes that form the Workload Plane, which is where your workloads (or applications) run. The worker node(s) host the Pods that are the components of the application workload. 
 
-<img src="images/kubernetes-architecture.jpg" width=100% height=100%>
+<img src="images/kubernetes-architecture.jpg" width=80% height=80%>
 
 ### Control Plane Components
 <img src="images/two_planes.jpg" width=80% height=80%>
 
-The Kubernetes control plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
+The Control Plane manages clusters and resources such as worker nodes and pods. The control plane receives information such as cluster activity, internal and external requests. 
 
 It ensures that every component in the cluster is kept in the desired state. It receives data about internal cluster events, external systems, and third-party applications, then processes the data and makes and executes decisions in response.
 
 The control plane manages and maintains the worker nodes that hold the containerized applications. The control plane not only exposes the layer that deploys the containers, but also manages their lifecycle. 
 
 There are several key parts to the control plane:
-
 <img src="images/control_plane.jpg" width=80% height=80%>
 
 * kube-apiserver - An API server that transmits data both within the cluster and with external services
@@ -129,14 +128,36 @@ Job controller: Watches for Job objects that represent one-off tasks, then creat
 EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
 ServiceAccount controller: Create default ServiceAccounts for new namespaces.
 
+
+3. **kube-controller-manager**
+
+4. **etcd**
+
+5. **cloud-controller-manager**
+
+## Data Plane
+The worker nodes are the computers on which your applications run. They form the cluster’s
+Workload Plane. In addition to applications, several Kubernetes components also run on
+these nodes. They perform the task of running, monitoring and providing connectivity
+between your applications. They are shown in the following figure.
+
+Each node runs the following set of components:
+• The Kubelet, an agent that talks to the API server and manages the applications
+running on its node. It reports the status of these applications and the node via the
+API.
+• The Container Runtime, which can be Docker or any other runtime compatible with
+Kubernetes. It runs your applications in containers as instructed by the Kubelet.
+• The Kubernetes Service Proxy (Kube Proxy) load-balances network traffic between
+applications. Its name suggests that traffic flows through it, but that’s no longer the
+case. You’ll learn why in chapter 14.
+
+
 <img src="images/data_plane.jpg" width=80% height=80%>
 
 ## How Kubernetes runs an application
-
 <img src="images/deploying_application.jpg" width=85% height=85%>
 
-
-_These actions take place when you deploy the application:_
+These actions take place when you deploy the application:
 1. You submit the application manifest to the Kubernetes API. The API Server writes the objects defined in the manifest to etcd.
 2. A controller notices the newly created objects and creates several new objects - one for each application instance.
 3. The Scheduler assigns a node to each instance.
