@@ -150,7 +150,7 @@ In addition to applications, several Kubernetes components also run on these nod
   * Responsible for Mounting volumes by reading pod configuration and creating respective directories on the host for the volume 
     mount.
   * Collecting and reporting Node and pod status via calls to the API server.
-* Kubelet is also a controller where it watches for pod changes and utilizes the node’s container runtime to pull images, run containers, etc.
+* Kubelet is also a controller where it watches for pod changes and utilizes the node’s container runtime to pull images, run containers.
 * Following are some of the key things about kubelet.
   * Kubelet uses the CRI (container runtime interface) gRPC interface to talk to the container runtime.
   * It also exposes an HTTP endpoint to stream logs and provides exec sessions for clients.
@@ -158,7 +158,7 @@ In addition to applications, several Kubernetes components also run on these nod
   * It uses the CNI plugin configured in the cluster to allocate the pod IP address and set up any necessary network routes and
     firewall rules for the pod.
 
-<img src="images/kubelet.jpg" width=85% height=85%>
+<img src="images/kubelet.jpg" width=65% height=60%>
 
 2. **Container Runtime**
 
