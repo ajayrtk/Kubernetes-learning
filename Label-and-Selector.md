@@ -31,5 +31,39 @@ spec:
     containers:
       - name: container01 
         image: ubuntu
-        command: ["/bin/bash", "-c", "while true; do echo Welcome to Lable Pod in container 01; sleep 5 ; done"]
+        command: ["/bin/bash", "-c", "while true; do echo Welcome to Label Pod in container01; sleep 5 ; done"]
+```
+
+```
+vi lablepod01.yaml
+kubectl apply -f lablepod01.yaml
+kubectl get pods -o wide
+kubectl get pods --show-labels
+--imperative format
+kubectl label pods labelpod myname=John
+kubectl get pods --show-labels
+
+kubectl get pod -l env=development
+kubectl get pod -l env!=development
+
+kubectl delete pod -l env!=development
+kubectl get pod -l 'env in (development,testing)'
+kubectl get pod -l 'env notin (development,testing)'
+```
+
+## Example of Node Selector
+```
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabels
+  labels:
+    env: development
+spec:
+  containers:
+  - name: container02
+    image: ubuntu
+    command: ["/bin/bash", "-c", "while true; do echo Welcome to nodelabels Pod in container 02; sleep 5 ; done"]
+    nodeSelector:                                         
+      hardware: t2-medium
 ```
